@@ -1,0 +1,43 @@
+html, body {
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    flex: auto;
+    display: flex;
+}
+
+header .header-div {
+    align-items: center;
+    gap: 2rem;
+    display: flex;
+    font-family: var(--wa-font-family-body), sans-serif;
+    font-size: var(--wa-font-size-4xl);
+    font-weight: var(--wa-font-weight-body);
+    line-height: var(--wa-line-height-normal);
+    flex-flow: row nowrap;
+}
+
+.body-container {
+    display: flex;
+    /*flex-direction: column;*/
+    height: 100%;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    color: red;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}

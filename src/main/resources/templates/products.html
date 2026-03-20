@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Management - Dashboard</title>
+    <script src="https://kit.webawesome.com/1a257bfedcd54677.js" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" th:href="@{/css/base.css}">-->
+    <!--    <link rel="stylesheet" href="/static/css/base.css">-->
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <!--    <link rel="stylesheet" href="/static/css/product.css">-->
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+            integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<header>
+    <div class="header-div">
+        <wa-icon name="industry" style="font-size: 100px;"></wa-icon>
+        <p>Product Management Dashboard</p>
+    </div>
+</header>
+
+<div class="body-container">
+    <!-- Load Products Button -->
+    <div class="section-card">
+        <p class="main-text">Product Catalog</p>
+        <p class="sub-text">Load and manage your product inventory</p>
+
+        <wa-button
+                variant="brand"
+                size="large"
+                hx-get="/products/list"
+                hx-target="#products-container"
+                hx-swap="innerHTML"
+                hx-indicator="#loading-spinner">
+            <wa-icon name="rotate" variant="solid"></wa-icon>
+            Load Products
+        </wa-button>
+
+        <!-- Loading Indicator -->
+        <div id="loading-spinner" class="htmx-indicator loading-message">
+            <wa-icon name="spinner" variant="solid" animation="spin"></wa-icon>
+            <span>Loading products...</span>
+        </div>
+    </div>
+
+    <!-- Products Table Container -->
+    <div id="products-container">
+        <div class="empty-state">
+            <wa-icon name="box-open" variant="solid"></wa-icon>
+            <p class="main-text">Click the button above to load products</p>
+        </div>
+    </div>
+
+    <!-- Add Product Form -->
+    <div class="section-card form-card">
+        <p class="main-text">Add New Product</p>
+        <p class="sub-text">Fill in the details to create a new product</p>
+
+        <form hx-post="/products/add"
+              hx-target="#products-container"
+              hx-swap="innerHTML"
+              hx-indicator="#form-loading">
+
+            <div class="form-grid">
+                <wa-input name="title" slot="start" placeholder="Enter product name" required>
+                    <span slot="label">
+                        <wa-icon name="heading"></wa-icon>
+                        Product Name
+                    </span>
+                </wa-input>
+
+                <wa-input name="productType" placeholder="Enter product type" required>
+                    <span slot="label">
+                        <wa-icon name="tag"></wa-icon>
+                        Product Type
+                    </span>
+                </wa-input>
+
+            </div>
+
+            <wa-textarea name="bodyHTML" placeholder="Enter product description" required>
+                <span slot="label">
+                        <wa-icon name="align-left"></wa-icon>
+                        Product Description
+                    </span>
+            </wa-textarea>
+
+
+            <wa-input name="imageUrl" type="url" placeholder="https://example.com/image.jpg" required>
+                <span slot="label">
+                    <wa-icon name="tag"></wa-icon>
+                    Product Image URL
+                </span>
+
+            </wa-input>
+
+            <div class="form-actions">
+                <wa-button type="submit" variant="success" size="large" data-dialog="open dialog-opening">
+                    <wa-icon name="plus-circle"></wa-icon>
+                    Add Product
+                </wa-button>
+
+                <wa-button type="reset" variant="neutral" size="large">
+                    <wa-icon name="times-circle"></wa-icon>
+                    Clear Form
+                </wa-button>
+
+                <wa-dialog id="dialog-opening">
+                    Product saved!
+                    <wa-button slot="footer" variant="brand" data-dialog="close">Close</wa-button>
+                </wa-dialog>
+
+                <div id="form-loading" class="htmx-indicator loading-message">
+                    <wa-icon name="spinner" variant="solid" animation="spin"></wa-icon>
+                    <span>Saving...</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<footer>
+    <p>
+        <i class="fa-solid fa-copyright"></i>
+        © 2026 Ian Henrick Letada </br> (Made for a test in Kotlin)
+    </p>
+</footer>
+
+
+</body>

@@ -1,0 +1,71 @@
+### Get products page
+GET {{baseUrl}}/products
+Accept: text/html
+
+### List all products
+GET {{baseUrl}}/products/list
+Accept: text/html
+
+### Add a new product
+POST {{baseUrl}}/products/add
+Content-Type: application/x-www-form-urlencoded
+
+title = Test Product &
+bodyHTML = <p>This is a test product</p> &
+productType = Electronics &
+imageUrl = https://example.com/image.jpg
+
+### Add another product for testing
+POST {{baseUrl}}/products/add
+Content-Type: application/x-www-form-urlencoded
+
+title = Sample Widget &
+bodyHTML = <p>Sample widget description</p> &
+productType = Widgets &
+imageUrl = https://example.com/widget.jpg
+
+### Delete a product.
+DELETE {{baseUrl}}/products/{{knownExistingProductId}}
+Accept: text/html
+
+### Get all products
+GET {{baseUrl}}/api/products
+Accept: application/json
+
+### Get product by ID (replace with actual UUID)
+GET {{baseUrl}}/api/products/{{knownExistingProductId}}
+Accept: application/json
+
+### Create a new product
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "title": "Test Product",
+  "bodyHTML": "<p>This is a test product</p>",
+  "productType": "Electronics",
+  "imageUrl": "https://example.com/image.jpg"
+}
+
+### Create another product
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "title": "Sample Widget",
+  "bodyHTML": "<p>Sample widget description</p>",
+  "productType": "Widgets",
+  "imageUrl": "https://example.com/widget.jpg"
+}
+
+### Update a product
+PUT {{baseUrl}}/api/products/{{knownExistingProductId}}
+Content-Type: application/json
+
+{
+  "title": "Updated Product Title",
+  "productType": "Updated Type"
+}
+
+### Delete a product
+DELETE {{baseUrl}}/api/products/{{knownExistingProductId}}

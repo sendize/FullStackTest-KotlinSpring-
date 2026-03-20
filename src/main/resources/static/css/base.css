@@ -1,0 +1,24 @@
+:root {
+    /* Color */
+    /*--wa-color-brand-spot: #0099ff;*/
+    /*--wa-color-primary-color: var(--wa-color-brand-spot);*/
+    /*--wa-color-main-color: var(--wa-color-brand-spot);*/
+    /* Font */
+
+    /* Size */
+
+    /* Buttons */
+}
+
+
+/*wa-button[variant="brand"]::part(base){*/
+/*    --background: linear-gradient(10deg, var(--wa-color-brand-600), var(--wa-color-green-600));*/
+/*    background: linear-gradient(10deg, #4f46e5, #10b981);*/
+/*    border-color: #4f46e5;*/
+/*    color: white;*/
+
+/*    !*--wa-button-background-color: linear-gradient(10deg, var(--wa-color-brand-600), var(--wa-color-green-600));*!*/
+/*    !*--wa-button-background-color-hover: linear-gradient(40deg, var(--wa-color-brand-700), var(--wa-color-green-700));*!*/
+/*    !*--wa-button-border-color: var(--wa-color-brand-600);*!*/
+/*    !*--wa-button-color: var(--wa-color-neutral-0);*!*/
+/*}*/

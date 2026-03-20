@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Management - Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@webawesome/fontawesome-free@6.6.0/css/all.min.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .htmx-indicator {
+            display: none;
+        }
+
+        .htmx-request .htmx-indicator {
+            display: flex;
+        }
+
+        .htmx-request.htmx-indicator {
+            display: flex;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stat-card-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .stat-card-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .stat-card-info {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .hero-pattern {
+            background-color: #667eea;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .product-image-wrapper img {
+            transition: transform 0.3s ease;
+        }
+
+        .product-image-wrapper:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Enhanced Header with Pattern -->
+<header class="hero-pattern wa-text-white wa-py-8 wa-shadow-2xl">
+    <div class="wa-container wa-mx-auto wa-px-4">
+        <div class="wa-flex wa-items-center wa-justify-between">
+            <div class="wa-flex wa-items-center wa-gap-4">
+                <div class="wa-bg-white wa-bg-opacity-20 wa-p-4 wa-rounded-2xl wa-backdrop-blur">
+                    <i class="fa-solid fa-boxes-stacked wa-text-4xl"></i>
+                </div>
+                <div>
+                    <h1 class="wa-text-4xl wa-font-bold wa-tracking-tight">Product Dashboard</h1>
+                    <p class="wa-text-purple-100 wa-mt-1 wa-text-lg">Complete inventory management system</p>
+                </div>
+            </div>
+            <div class="wa-hidden md:wa-flex wa-gap-3">
+                <button class="wa-btn wa-btn-light wa-gap-2">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Analytics
+                </button>
+                <button class="wa-btn wa-btn-light wa-gap-2">
+                    <i class="fa-solid fa-cog"></i>
+                    Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content with improved spacing -->
+<main class="wa-container wa-mx-auto wa-px-4 wa-py-8">
+
+    <!-- Stats Cards -->
+    <div class="wa-grid wa-grid-cols-1 md:wa-grid-cols-4 wa-gap-6 wa-mb-8 fade-in">
+
+        <div class="stat-card wa-rounded-2xl wa-shadow-xl wa-p-6 card-hover">
+            <div class="wa-flex wa-items-center wa-justify-between">
+                <div>
+                    <p class="wa-text-white wa-text-opacity-80 wa-text-sm wa-font-semibold wa-uppercase">Total
+                        Products</p>
+                    <p class="wa-text-4xl wa-font-bold wa-mt-2" id="total-products">--</p>
+                </div>
+                <div class="wa-bg-white wa-bg-opacity-20 wa-p-4 wa-rounded-xl">
+                    <i class="fa-solid fa-box wa-text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card-success wa-rounded-2xl wa-shadow-xl wa-p-6 card-hover">
+            <div class="wa-flex wa-items-center wa-justify-between">
+                <div>
+                    <p class="wa-text-white wa-text-opacity-80 wa-text-sm wa-font-semibold wa-uppercase">Active
+                        Items</p>
+                    <p class="wa-text-4xl wa-font-bold wa-mt-2">127</p>
+                </div>
+                <div class="wa-bg-white wa-bg-opacity-20 wa-p-4 wa-rounded-xl">
+                    <i class="fa-solid fa-check-circle wa-text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card-warning wa-rounded-2xl wa-shadow-xl wa-p-6 card-hover">
+            <div class="wa-flex wa-items-center wa-justify-between">
+                <div>
+                    <p class="wa-text-white wa-text-opacity-80 wa-text-sm wa-font-semibold wa-uppercase">Categories</p>
+                    <p class="wa-text-4xl wa-font-bold wa-mt-2">12</p>
+                </div>
+                <div class="wa-bg-white wa-bg-opacity-20 wa-p-4 wa-rounded-xl">
+                    <i class="fa-solid fa-tags wa-text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card-info wa-rounded-2xl wa-shadow-xl wa-p-6 card-hover">
+            <div class="wa-flex wa-items-center wa-justify-between">
+                <div>
+                    <p class="wa-text-white wa-text-opacity-80 wa-text-sm wa-font-semibold wa-uppercase">Total
+                        Variants</p>
+                    <p class="wa-text-4xl wa-font-bold wa-mt-2" id="total-variants">--</p>
+                </div>
+                <div class="wa-bg-white wa-bg-opacity-20 wa-p-4 wa-rounded-xl">
+                    <i class="fa-solid fa-layer-group wa-text-3xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Products Section with Glass Effect -->
+    <div class="wa-mb-8 fade-in">
+        <div class="glass-effect wa-rounded-2xl wa-shadow-2xl wa-p-8 card-hover">
+            <div class="wa-flex wa-flex-col md:wa-flex-row md:wa-items-center md:wa-justify-between wa-gap-4">
+                <div class="wa-flex wa-items-center wa-gap-4">
+                    <div class="wa-bg-gradient-to-br wa-from-purple-500 wa-to-purple-700 wa-p-4 wa-rounded-xl wa-shadow-lg">
+                        <i class="fa-solid fa-database wa-text-3xl wa-text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="wa-text-3xl wa-font-bold wa-text-neutral-800 wa-mb-1">
+                            Product Catalog
+                        </h2>
+                        <p class="wa-text-neutral-600 wa-text-lg">View and manage all products in your inventory</p>
+                    </div>
+                </div>
+                <button
+                        class="wa-btn wa-btn-primary wa-btn-lg wa-gap-3 wa-shadow-lg wa-px-8"
+                        hx-get="/products/list"
+                        hx-target="#products-container"
+                        hx-swap="innerHTML"
+                        hx-indicator="#loading-spinner"
+                        onclick="updateStats()">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span class="wa-font-semibold">Load Products</span>
+                </button>
+            </div>
+
+            <!-- Enhanced Loading Spinner -->
+            <div id="loading-spinner"
+                 class="htmx-indicator wa-mt-6 wa-p-4 wa-bg-purple-50 wa-rounded-xl wa-border-2 wa-border-purple-200">
+                <div class="wa-flex wa-items-center wa-gap-3 wa-text-purple-600">
+                    <i class="fa-solid fa-spinner fa-spin wa-text-2xl"></i>
+                    <div>
+                        <p class="wa-font-semibold wa-text-lg">Loading products...</p>
+                        <p class="wa-text-sm wa-text-purple-500">Please wait while we fetch your data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Container -->
+    <div id="products-container" class="fade-in">
+        <!-- Products table will be loaded here -->
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="wa-container wa-mx-auto wa-px-4 wa-py-8 wa-mt-12">
+    <div class="glass-effect wa-rounded-2xl wa-p-6 wa-text-center">
+        <p class="wa-text-neutral-600">
+            <i class="fa-solid fa-copyright"></i>
+            2024 Product Management System - Built with HTMX & Thymeleaf
+        </p>
+    </div>
+</footer>
+
+<script>
+    function updateStats() {
+        // This will be called after products are loaded
+        setTimeout(() => {
+            const rows = document.querySelectorAll('#products-table-body tr');
+            document.getElementById('total-products').textContent = rows.length;
+
+            let totalVariants = 0;
+            rows.forEach(row => {
+                const variantBadge = row.querySelector('.wa-badge-secondary');
+                if (variantBadge) {
+                    const count = parseInt(variantBadge.textContent.match(/\d+/)[0]);
+                    totalVariants += count;
+                }
+            });
+            document.getElementById('total-variants').textContent = totalVariants;
+        }, 100);
+    }
+
+    // Listen for HTMX after swap event
+    document.body.addEventListener('htmx:afterSwap', function (evt) {
+        if (evt.detail.target.id === 'products-container') {
+            updateStats();
+        }
+    });
+</script>
+
+</body>
+</html>
