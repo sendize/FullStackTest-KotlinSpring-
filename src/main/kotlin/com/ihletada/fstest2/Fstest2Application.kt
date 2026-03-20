@@ -12,7 +12,7 @@ class Fstest2Application
 fun main(args: Array<String>) {
     val dotenv = dotenv {
         systemProperties = true
-        ignoreIfMissing = false
+        ignoreIfMissing = true
     }
 
     runApplication<Fstest2Application>(*args)
