@@ -25,7 +25,7 @@ class ProductController(
     fun listProducts(model: Model): String {
         val products = productRepository.fetchWithVariants()
         model.addAttribute("products", products)
-        return "fragments/products :: products-table"
+        return "fragments/fragment-products :: products-table"
     }
 
     @PostMapping("/add")
@@ -51,7 +51,7 @@ class ProductController(
         model.addAttribute("products", products)
 
 //        response.addHeader("HX-Trigger", "productAdded")
-        return "fragments/products :: products-table"
+        return "fragments/fragment-products :: products-table"
     }
 
     @DeleteMapping("/{id}")
@@ -61,6 +61,6 @@ class ProductController(
         // Reload the products list
         val products = productRepository.fetchWithVariants()
         model.addAttribute("products", products)
-        return "fragments/products :: products-table"
+        return "fragments/fragment-products :: products-table"
     }
 }
