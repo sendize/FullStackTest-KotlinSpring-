@@ -1,4 +1,4 @@
-package com.ihletada.fstest2.controllers.view
+package com.ihletada.fullstackapp.controllers.view
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

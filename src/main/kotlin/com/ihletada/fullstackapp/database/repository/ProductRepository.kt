@@ -1,8 +1,8 @@
-package com.ihletada.fstest2.database.repository
+package com.ihletada.fullstackapp.database.repository
 
-import com.ihletada.fstest2.database.model.Product
-import com.ihletada.fstest2.database.model.ProductVariant
-import com.ihletada.fstest2.database.row_mappers.ProductRowMapper
+import com.ihletada.fullstackapp.database.model.Product
+import com.ihletada.fullstackapp.database.model.ProductVariant
+import com.ihletada.fullstackapp.database.row_mappers.ProductRowMapper
 import org.springframework.jdbc.core.BatchPreparedStatementSetter
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.simple.JdbcClient

@@ -1,7 +1,7 @@
-package com.ihletada.fstest2.controllers.api
+package com.ihletada.fullstackapp.controllers.api
 
-import com.ihletada.fstest2.database.model.Product
-import com.ihletada.fstest2.database.repository.ProductRepository
+import com.ihletada.fullstackapp.database.model.Product
+import com.ihletada.fullstackapp.database.repository.ProductRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

@@ -1,4 +1,4 @@
-package com.ihletada.fstest2
+package com.ihletada.fullstackapp
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,7 +7,7 @@ import io.github.cdimascio.dotenv.dotenv
 
 @SpringBootApplication
 @EnableScheduling
-class Fstest2Application
+class FullStackApp
 
 fun main(args: Array<String>) {
     val dotenv = dotenv {
@@ -15,6 +15,6 @@ fun main(args: Array<String>) {
         ignoreIfMissing = true
     }
 
-    runApplication<Fstest2Application>(*args)
+    runApplication<FullStackApp>(*args)
 }
 

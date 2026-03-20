@@ -1,4 +1,4 @@
-package com.ihletada.fstest2.tasks
+package com.ihletada.fullstackapp.tasks
 
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -6,9 +6,9 @@ import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
 import org.springframework.web.util.UriComponentsBuilder
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.ihletada.fstest2.database.model.Product
-import com.ihletada.fstest2.database.model.ProductVariant
-import com.ihletada.fstest2.database.repository.ProductRepository
+import com.ihletada.fullstackapp.database.model.Product
+import com.ihletada.fullstackapp.database.model.ProductVariant
+import com.ihletada.fullstackapp.database.repository.ProductRepository
 
 @Component
 class ProductFetcher(

@@ -1,7 +1,7 @@
-package com.ihletada.fstest2.controllers.view
+package com.ihletada.fullstackapp.controllers.view
 
-import com.ihletada.fstest2.database.model.Product
-import com.ihletada.fstest2.database.repository.ProductRepository
+import com.ihletada.fullstackapp.database.model.Product
+import com.ihletada.fullstackapp.database.repository.ProductRepository
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

@@ -1,4 +1,4 @@
-package com.ihletada.fstest2.database.model
+package com.ihletada.fullstackapp.database.model
 
 import com.github.f4b6a3.uuid.UuidCreator
 import java.time.LocalDateTime

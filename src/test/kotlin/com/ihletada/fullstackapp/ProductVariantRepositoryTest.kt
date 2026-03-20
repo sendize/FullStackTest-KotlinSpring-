@@ -1,7 +1,7 @@
-package com.ihletada.fstest2
+package com.ihletada.fullstackapp
 
-import com.ihletada.fstest2.database.model.ProductVariant
-import com.ihletada.fstest2.database.repository.ProductVariantRepository
+import com.ihletada.fullstackapp.database.model.ProductVariant
+import com.ihletada.fullstackapp.database.repository.ProductVariantRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

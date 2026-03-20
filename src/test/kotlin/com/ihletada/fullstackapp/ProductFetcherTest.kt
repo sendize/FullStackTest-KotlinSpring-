@@ -1,7 +1,7 @@
-package com.ihletada.fstest2
+package com.ihletada.fullstackapp
 
-import com.ihletada.fstest2.database.repository.ProductRepository
-import com.ihletada.fstest2.tasks.ProductFetcher
+import com.ihletada.fullstackapp.database.repository.ProductRepository
+import com.ihletada.fullstackapp.tasks.ProductFetcher
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

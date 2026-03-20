@@ -1,6 +1,5 @@
-package com.ihletada.fstest2
+package com.ihletada.fullstackapp
 
-import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean

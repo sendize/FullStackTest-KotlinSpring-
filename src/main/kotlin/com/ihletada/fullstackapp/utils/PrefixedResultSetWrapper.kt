@@ -1,8 +1,6 @@
-package com.ihletada.fstest2.utils
+package com.ihletada.fullstackapp.utils
 
 import java.sql.ResultSet
-import java.sql.ResultSetMetaData
-import java.sql.SQLException
 
 /**
  * Wrapper for ResultSet that strips a prefix from column names.

@@ -1,6 +1,6 @@
-package com.ihletada.fstest2.database.row_mappers
+package com.ihletada.fullstackapp.database.row_mappers
 
-import com.ihletada.fstest2.database.model.ProductVariant
+import com.ihletada.fullstackapp.database.model.ProductVariant
 import org.springframework.jdbc.core.RowMapper
 import java.sql.ResultSet
 import java.util.UUID

@@ -2,9 +2,6 @@ server:
   port: 8900
 
 spring:
-  profiles:
-    active: dev
-
   web:
     resources:
       cache:
@@ -21,12 +18,10 @@ spring:
 
   thymeleaf:
     cache: false
-    prefix: classpath:/templates/
-    suffix: .html
 
 
   application:
-    name: fstest-2
+    name: FullStackApp
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
