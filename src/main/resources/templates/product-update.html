@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Update Product - Dashboard</title>
+    <script src="https://kit.webawesome.com/1a257bfedcd54677.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+            integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="header-div">
+        <wa-icon name="edit" style="font-size: 100px;"></wa-icon>
+        <p>Update Product</p>
+    </div>
+</header>
+
+<div class="body-container">
+    <!-- Back Button -->
+    <div class="section-card">
+        <wa-button
+                variant="neutral"
+                size="large"
+                onclick="window.location.href='/products'">
+            <wa-icon name="arrow-left"></wa-icon>
+            Back to Products
+        </wa-button>
+    </div>
+
+    <!-- Update Product Form -->
+    <div class="section-card form-card">
+        <p class="main-text">Update Product Details</p>
+        <p class="sub-text">Modify the fields you want to update</p>
+
+        <form th:if="${product != null}"
+              th:action="@{/products/update/{id}(id=${product.internalId})}"
+              method="post">
+
+            <div class="form-grid">
+                <wa-input name="title" slot="start" placeholder="Enter product name"
+                          th:value="${product.title}" required>
+                    <span slot="label">
+                        <wa-icon name="heading"></wa-icon>
+                        Product Name
+                    </span>
+                </wa-input>
+
+                <wa-input name="productType" placeholder="Enter product type"
+                          th:value="${product.productType}" required>
+                    <span slot="label">
+                        <wa-icon name="tag"></wa-icon>
+                        Product Type
+                    </span>
+                </wa-input>
+            </div>
+
+            <wa-textarea name="bodyHTML" placeholder="Enter product description"
+                         th:value="${product.bodyHTML}" required>
+                <span slot="label">
+                    <wa-icon name="align-left"></wa-icon>
+                    Product Description
+                </span>
+            </wa-textarea>
+
+            <wa-input name="imageUrl" type="url" placeholder="https://example.com/image.jpg"
+                      th:value="${product.imageUrl}" required>
+                <span slot="label">
+                    <wa-icon name="tag"></wa-icon>
+                    Product Image URL
+                </span>
+            </wa-input>
+
+            <div class="form-actions">
+                <wa-button type="submit" variant="success" size="large">
+                    <wa-icon name="check-circle"></wa-icon>
+                    Update Product
+                </wa-button>
+
+                <wa-button type="button" variant="neutral" size="large"
+                           onclick="window.location.href='/products'">
+                    <wa-icon name="times-circle"></wa-icon>
+                    Cancel
+                </wa-button>
+            </div>
+        </form>
+
+        <div th:if="${product == null}" class="empty-state">
+            <wa-icon name="exclamation-triangle" variant="solid"></wa-icon>
+            <p class="main-text">Product not found</p>
+            <p class="sub-text">The product you're trying to update doesn't exist</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>
+        <i class="fa-solid fa-copyright"></i>
+        © 2026 Ian Henrick Letada </br> (Made for a test in Kotlin)
+    </p>
+</footer>
+
+</body>
+</html>

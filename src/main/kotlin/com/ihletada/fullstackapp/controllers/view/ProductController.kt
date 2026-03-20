@@ -84,4 +84,36 @@ class ProductController(
         model.addAttribute("query", query)
         return "fragments/fragment-product-search :: search-results-table"
     }
+
+    @GetMapping("/update/{id}")
+    fun updateProductPage(@PathVariable id: String, model: Model): String {
+        val product = productRepository.fetchByInternalId(id)
+        model.addAttribute("product", product)
+        return "product-update"
+    }
+
+    @PostMapping("/update/{id}")
+    fun updateProduct(
+        @PathVariable id: String,
+        @RequestParam title: String,
+        @RequestParam bodyHTML: String,
+        @RequestParam productType: String,
+        @RequestParam imageUrl: String,
+        response: HttpServletResponse
+    ): String {
+        val existingProduct = productRepository.fetchByInternalId(id)
+            ?: return "redirect:/products"
+
+        val updatedProduct = existingProduct.copy(
+            title = title,
+            bodyHTML = bodyHTML,
+            productType = productType,
+            imageUrl = imageUrl
+        )
+
+        productRepository.update(updatedProduct)
+
+        // Redirect back to products page
+        return "redirect:/products"
+    }
 }
