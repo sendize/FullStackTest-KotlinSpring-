@@ -103,7 +103,7 @@ class ProductRepository(
             """.trimIndent()
 
         val productMap = mutableMapOf<java.util.UUID, Product>()
-        val productVariantMap = linkedMapOf<java.util.UUID, MutableList<ProductVariant>>()
+        val productVariantMap = mutableMapOf<java.util.UUID, MutableList<ProductVariant>>()
 
         var query = jdbcClient.sql(sql)
         params.forEach { (key, value) ->

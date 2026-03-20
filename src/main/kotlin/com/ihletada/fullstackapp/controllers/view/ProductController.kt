@@ -50,7 +50,7 @@ class ProductController(
         val products = productRepository.fetchWithVariants()
         model.addAttribute("products", products)
 
-        response.addHeader("HX-Trigger", "productAdded")
+//        response.addHeader("HX-Trigger", "productAdded")
         return "fragments/products :: products-table"
     }
 

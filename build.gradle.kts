@@ -38,7 +38,6 @@ dependencies {
     implementation("com.github.f4b6a3:uuid-creator:5.3.5")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("io.github.cdimascio:dotenv-kotlin:6.5.1")
-
 }
 
 kotlin {
