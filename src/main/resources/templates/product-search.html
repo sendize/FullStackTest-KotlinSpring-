@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Search - Dashboard</title>
+    <script src="https://kit.webawesome.com/1a257bfedcd54677.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+            integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="header-div">
+        <wa-icon name="search" style="font-size: 100px;"></wa-icon>
+        <p>Product Search</p>
+    </div>
+</header>
+
+<div class="body-container">
+    <!-- Search Section -->
+    <div class="section-card">
+        <p class="main-text">Search Products</p>
+        <p class="sub-text">Search for products by title - results update as you type</p>
+
+        <div class="search-input-wrapper">
+            <wa-input
+                    name="query"
+                    placeholder="Start typing to search..."
+                    size="large"
+                    hx-get="/products/search/results"
+                    hx-trigger="keyup changed delay:300ms"
+                    hx-target="#search-results-container"
+                    hx-swap="innerHTML"
+                    hx-indicator="#search-spinner">
+                <span slot="label">
+                    <wa-icon name="search"></wa-icon>
+                    Search by Product Title
+                </span>
+            </wa-input>
+
+            <!-- Loading Indicator -->
+            <div id="search-spinner" class="htmx-indicator loading-message">
+                <wa-icon name="spinner" variant="solid" animation="spin"></wa-icon>
+                <span>Searching...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Results Container -->
+    <div id="search-results-container">
+        <div class="empty-state">
+            <wa-icon name="magnifying-glass" variant="solid"></wa-icon>
+            <p class="main-text">Start typing to search for products</p>
+            <p class="sub-text">Search results will appear here</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>
+        <i class="fa-solid fa-copyright"></i>
+        © 2026 Ian Henrick Letada </br> (Made for a test in Kotlin)
+    </p>
+</footer>
+
+</body>
+</html>

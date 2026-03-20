@@ -42,7 +42,7 @@ header .header-div {
 .body-container {
     flex: 1;
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
     padding: 2rem;
     background-color: var(--wa-color-brand-90);
     width: 100%;

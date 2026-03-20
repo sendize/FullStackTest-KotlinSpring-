@@ -63,4 +63,25 @@ class ProductController(
         model.addAttribute("products", products)
         return "fragments/fragment-products :: products-table"
     }
+
+    @GetMapping("/search")
+    fun searchPage() = "product-search"
+
+    @GetMapping("/search/results")
+    fun searchProducts(
+        @RequestParam(required = false, defaultValue = "") query: String,
+        model: Model
+    ): String {
+        val products = if (query.isBlank()) {
+            emptyList()
+        } else {
+            productRepository.fetchWithVariants(
+                whereClause = "WHERE LOWER(p.title) LIKE LOWER(:query)",
+                params = mapOf("query" to "%$query%")
+            )
+        }
+        model.addAttribute("products", products)
+        model.addAttribute("query", query)
+        return "fragments/fragment-product-search :: search-results-table"
+    }
 }
